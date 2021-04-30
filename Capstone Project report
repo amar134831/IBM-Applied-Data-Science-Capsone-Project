@@ -1,0 +1,53 @@
+Methodology:
+Choice of Algorithms
+
+I chose K-Means Clustering. https://towardsdatascience.com/clustering-algorithms-for-customer-segmentation-af637c6830ac
+
+A backgrounder on K-Means clustering
+
+“K-means clustering is an iterative clustering algorithm where the number of clusters K is predetermined and the algorithm iteratively assigns each data point to one of the K clusters based on the feature similarity.”
+
+Key Observation: And for my project feature similarity means restaurant similarity in Neighborhoods
+
+Choosing the correct number of clusters.
+
+https://www.jeremyjordan.me/grouping-data-points-with-k-means-clustering/ Here I use Silhouette analysis to determine the optimum number of clusters to use.
+
+A backgrounder on Silhouette analysis.
+
+“We can use Silhouette analysis to evaluate each model. A Silhouette coefficient is calculated for observation, which is then averaged to determine the Silhouette score. The coefficient combines the average within-cluster distance with average nearest-cluster distance to assign a value between -1 and 1. A value below zero denotes that the observation is probably in the wrong cluster and a value closer to 1 denotes that the observation is a great fit for the cluster and clearly separated from other clusters. This coefficient essentially measures how close an observation is to neighboring clusters, where it is desirable to be the maximum distance possible from neighboring clusters. We can automatically determine the best number of clusters, k, by selecting the model which yields the highest Silhouette score.”
+
+Key Observation: My highest score was 2.
+
+2.1 Run K means and segment data into clusters and generate labels
+2.2 Merge the Toronto data with geo coordinates data and make sure it's the right shape
+Here I reshape the Toronto data so that it’s shape matches the clustered data.
+
+2.3 Add the KMeans Labels
+Determine the largest cluster in this case it was cluster number 2 with a shape of (76, 15)
+
+3. Cluster 2 Contains the highest cluster density. We need to find the geographic centroid for this cluster. This is the optimum location for a new Restaurant Supply Store.
+Here we take the average latitude and longitude to be the centroid.
+
+3.1 Install opencage to reverse lookup the coordinates
+Opencage allows me to reverse lookup the geo coordinates. Key Observation: This is the optimum location for a new Restaurant Supply Store.
+
+Results:
+4.1 Plot the clusters on a Map of the Toronto and Super Impose the best location of a Store
+image.png
+
+4.2 Exact Address of desired Location
+Based on a reverse Lookup The exact Address to locate would be: 268 Balliol Street, ON M4S 1C2, Canada or lat: 43.6991598, lng: -79.3878871
+
+Discussion:
+5.1 Explaining the results
+As we built our list of neighborhoods with Restaurant venues exclusively we discovered most neighborhoods were similar and the greatest concentration of restaurants was in Central Toronto and downtown Toronto. This might seem obvious but it would also appear that these are some of the most affluent neighborhoods in Toronto so there appears to be correlation. By Locating in the general vicinity of the Exact location my friend could be geographically centered in this cluster and poised to service his restaurant customer base with greatest efficiency.
+
+When we built our our K-Means dataset we used Silhouette analysis to tell us there was a lot of similarity between neighborhoods and the most common restaurants contained with in. Really there was only 2 types of cluster or neighborhoods in greater Toronto. The vast majority of those were in 1 cluster. So Toronto restaurants might be many but they are very homogeneously located near the center of Toronto.
+
+Of the 103 Toronto Neighborhoods gathered only 55.3% or 57 Neighborhoods are above the median after-tax income. 37.8% or 39 Neighborhoods are below he median after-tax income. 6.7% or 7 neighborhoods did not register as it appears their populations are too low. It appears that the greatest concentration of affluence is near central Toronto. We decided to keep all neighborhoods in the dataset regardless of income of population as the majority were close enough.
+
+Conclusion:
+I feel confident with the recommendation I have given my friend as it is backed up with demonstrated data analysis. While nothing can ever be 100% certain he will certainly be better informed than he was prior to asking for my help.
+
+Much more inference can be obtained with more work. A potential side business for my friend might be assisting new restaurant owners where they might locate a new restaurant, who their competition is and who their clientele might be.
